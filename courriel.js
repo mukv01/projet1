@@ -28,7 +28,7 @@ var etat = {
     "90221F212A4200001AA": {"name": "Bob"} }
 };
 
-function onButtonComposerClick(){
+function onButtonComposeClick(){
   //alert("Composer");
 
   var content = "<table>\n";
@@ -74,7 +74,7 @@ function onButtonInboxClick(){
 
   for(var i = 0;i < etat.inbox.length;i++){
     content += "    <tr>\n";
-    content += "      <td><a href='#'>" + etat.inbox[i].from + "</a></td><td>" + etat.inbox[i].date + "</td>\n";
+    content += "      <td><a href='#?from=" + etat.inbox[i].from + "&date=" + etat.inbox[i].date + "&msg=" + etat.inbox[i].msg + "' onclick='onLinkInboxMessageClick()'>" + etat.inbox[i].from + "</a></td><td>" + etat.inbox[i].date + "</td>\n";
     content += "    </tr>\n";
   }
   content    += " </tbody>\n";
@@ -97,7 +97,7 @@ function onButtonOutboxClick(){
 
   for(var i = 0;i < etat.outbox.length;i++){
     content += "    <tr>\n";
-    content += "      <td><a href='#'>" + etat.outbox[i].to + "</a></td><td>" + etat.outbox[i].date + "</td>\n";
+	content += "      <td><a href='#?to=" + etat.outbox[i].to + "&date=" + etat.outbox[i].date + "&msg=" + etat.outbox[i].msg + "' onclick='onLinkOutboxMessageClick()'>" + etat.outbox[i].to + "</a></td><td>" + etat.outbox[i].date + "</td>\n";
     content += "    </tr>\n";
   }
   content    += " </tbody>\n";
@@ -134,10 +134,67 @@ function onButtonSendClick() {
 	var selectText = getSelectedText('select-compose');
 	var texteareaText = document.getElementById('textarea-compose').value
 	var dateText = getCurrentDateTimeText();
-	//"2016 01 03 10:15:31"
-	alert(dateText);
+	
+	var objet = {
+      "to": selectText,
+      "date": dateText,
+      "msg": texteareaText };
+	  
+	etat.outbox.push(objet);
+	alert("Your message has been sent");
 }
 
+function onLinkInboxMessageClick() {
+	var list = getUrlVars();
+	
+	var from1 = list["from"];
+	var date = list["date"];
+	var msg  = list["msg"];
+	
+	var content = "<table>\n";
+	content    += " <tr>\n";
+	content    += "   <td>From:</td>\n";
+	content    += "   <td>" + from1 + "</td>\n";
+	content    += "	</tr>\n";
+	content    += " <tr>\n";
+	content    += "   <td>Date:</td>\n";
+	content    += "   <td>" + date + "</td>\n";
+	content    += "	</tr>\n";
+	content    += " <tr>\n";
+	content    += "   <td>Message:</td>\n";
+	content    += "   <td>" + msg + "</td>\n";
+	content    += "	</tr>\n";
+	content    += "</table>\n";
+
+	var bottomRightRegion = document.getElementById('bottom-right-region');
+	bottomRightRegion.innerHTML = content;
+}
+
+function onLinkOutboxMessageClick() {
+	var list = getUrlVars();
+	
+	var to = list["to"];
+	var date = list["date"];
+	var msg  = list["msg"];
+	
+	var content = "<table>\n";
+	content    += " <tr>\n";
+	content    += "   <td>To:</td>\n";
+	content    += "   <td>" + to + "</td>\n";
+	content    += "	</tr>\n";
+	content    += " <tr>\n";
+	content    += "   <td>Date:</td>\n";
+	content    += "   <td>" + date + "</td>\n";
+	content    += "	</tr>\n";
+	content    += " <tr>\n";
+	content    += "   <td>Message:</td>\n";
+	content    += "   <td>" + msg + "</td>\n";
+	content    += "	</tr>\n";
+	content    += "</table>\n";
+
+	var bottomRightRegion = document.getElementById('bottom-right-region');
+	bottomRightRegion.innerHTML = content;
+}
 
 // Outils
 function getSelectedText(elementId) {
@@ -173,5 +230,19 @@ function getCurrentDateTimeText(){
 	if(ss < 10) {
 		ss = '0' + ss;
 	} 
+	//"2016 01 03 10:15:31"
 	return yyyy + " " +  mm + " " + dd + " " + hh + ":" + MM + ":" + ss;     
+}
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+function getUrlVars() {
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		vars[key] = value.replaceAll("%20", " ");
+	});
+	return vars;
 }
