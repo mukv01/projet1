@@ -1,0 +1,38 @@
+td {
+  border-style: solid;
+  border-color: black;
+  /*background-color: red;*/
+}
+
+table {
+    width: 100%;
+    height: 100%;
+}
+
+#top-left-region {
+  width: 25%;
+  height: 10%;
+}
+
+#top-right-region {
+  width: 75%;
+  height: 10%;
+}
+
+#bottom-left-region {
+  width: 25%;
+  height: 90%;
+}
+
+#bottom-right-region {
+  width: 75%;
+  height: 90%;
+}
+
+button {
+  width: 80%;
+}
+
+#bottom-left-region td {
+  text-align: center;
+}
