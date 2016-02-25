@@ -24,7 +24,7 @@ function onButtonComposeClick(){
   var content = [];
   content.push("<table>");
   content.push(" <tr>");
-  content.push("   <td> To: </td>");
+  content.push("   <td class='bold'> To: </td>");
   content.push("     <td>");
   content.push("       <select id='select-compose'>");
 
@@ -35,7 +35,7 @@ function onButtonComposeClick(){
   content.push("     </td>");
   content.push("  </tr>");
   content.push("  <tr>");
-  content.push("    <td> Message: </td>");
+  content.push("    <td class='bold'> Message: </td>");
   content.push("    <td>");
   content.push("      <textarea id='textarea-compose' cols='40' rows='5'>messag...</textarea>");
   content.push("    </td>");
@@ -199,10 +199,10 @@ function onLinkYpEditClick(address,name){
 	var content = [];
 	content.push("<table>");
 	content.push("	<tr>");
-	content.push("		<td class='title'><label for='address'>Address:</label></td><td><input type='text' name='address' id='text-address' value='" + address + "' disabled /></td>");
+	content.push("		<td class='bold'><label for='address'>Address:</label></td><td><input type='text' name='address' id='text-address' value='" + address + "' disabled /></td>");
 	content.push("	</tr>");
 	content.push("	<tr>");
-	content.push("		<td class='title'><label for='name'>Name:</label></td><td><input type='text' name='name' id='text-name' value='" + name + "' /></td>");
+	content.push("		<td class='bold'><label for='name'>Name:</label></td><td><input type='text' name='name' id='text-name' value='" + name + "' /></td>");
 	content.push("	</tr>");
 	content.push("	<tr>");
 	content.push("		<td></td><td><button type='button' onclick='onButtonYpEditSaveClick()'>Save</button></td>");
@@ -226,10 +226,10 @@ function onButtonYpAddClick(){
 	var content = [];
 	content.push("<table>");
 	content.push("	<tr>");
-	content.push("		<td><label for='address'>Address</label></td><td><input type='text' name='address' id='text-address' value='' /></td>");
+	content.push("		<td class='bold'><label for='address'>Address:</label></td><td><input type='text' name='address' id='text-address' value='' /></td>");
 	content.push("	</tr>");
 	content.push("	<tr>");
-	content.push("		<td><label for='name'>Name</label></td><td><input type='text' name='name' id='text-name' value='' /></td>");
+	content.push("		<td class='bold'><label for='name'>Name:</label></td><td><input type='text' name='name' id='text-name' value='' /></td>");
 	content.push("	</tr>");
 	content.push("	<tr>");
 	content.push("		<td></td><td><button type='button' onclick='onButtonYpAddSaveClick()'>Add</button></td>");

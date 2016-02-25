@@ -1,38 +1,46 @@
-td {
-  border-style: solid;
-  border-color: black;
-  /*background-color: red;*/
+body {
+	font-family:verdana;
+}
+
+button, input[type="text"],select {
+	width:200px;
 }
 
 table {
-    width: 100%;
-    height: 100%;
+	width:100%;
+	border-spacing:0;
+}
+
+table.main-frame {
+	height: 100%;
+}
+
+tr.top-row {
+	height: 30px;
+}
+
+thead, td.bold {
+	font-weight:bold;
 }
 
 #top-left-region {
-  width: 25%;
-  height: 10%;
+	background-color:#0072C3;
+	padding-left:4px;
+	width:200px;
 }
 
 #top-right-region {
-  width: 75%;
-  height: 10%;
+	background-color:#0072C3;
+	color:#ffffff;
+	font-size:24px;
 }
 
 #bottom-left-region {
-  width: 25%;
-  height: 90%;
+  background-color:#EFEFF1;
+  vertical-align:top;
+ 
 }
 
 #bottom-right-region {
-  width: 75%;
-  height: 90%;
-}
-
-button {
-  width: 80%;
-}
-
-#bottom-left-region td {
-  text-align: center;
+  vertical-align:top;
 }
