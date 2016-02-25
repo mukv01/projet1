@@ -2,7 +2,7 @@
 
 On se donne une représentation de l'état du système par une structure
 de données suivante:
-
+```
 etat = {
   "inbox": [
     {
@@ -22,12 +22,12 @@ etat = {
     "AF22111212232211122": {"name": "Jean Fanchon"},
     "90221F212A4200001AA": {"name": "Bob"} }
 }
-
+```
 L'interface _web_ devrait pouvoir:
 
-    Visualiser l'état: lecture des messages dans `etat.inbox` et `etat.outbox`, et des adresses dans `etat.yp`.
-    Composer un nouveau message en l'ajoutant dans la liste `etat.outbox`.
-    Modifier la liste d'adresse `etat.yp`
+    1. Visualiser l'état: lecture des messages dans `etat.inbox` et `etat.outbox`, et des adresses dans `etat.yp`.
+    2. Composer un nouveau message en l'ajoutant dans la liste `etat.outbox`.
+    3. Modifier la liste d'adresse `etat.yp`
 
 Chaque groupe (de 4 à 6 personnes) devrait produire un document
 

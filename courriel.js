@@ -8,14 +8,6 @@ var etat = {
     {
       "from": "AF22111212232211122",
       "date": "2016 01 03 10:15:31",
-      "msg": "Un autre message ...." },
-    {
-      "from": "AF22111212232211122",
-      "date": "2016 01 03 10:15:31",
-      "msg": "Un autre message ...." },
-    {
-      "from": "AF22111212232211122",
-      "date": "2016 01 03 10:15:31",
       "msg": "Un autre message ...." }
     ],
   "outbox": [
@@ -29,110 +21,121 @@ var etat = {
 };
 
 function onButtonComposeClick(){
-  //alert("Composer");
-
-  var content = "<table>\n";
-  content    += " <tr>\n";
-  content    += "   <td> To: </td>\n";
-  content    += "     <td>\n";
-  content    += "       <select id='select-compose'>\n";
+  var content = [];
+  content.push("<table>");
+  content.push(" <tr>");
+  content.push("   <td> To: </td>");
+  content.push("     <td>");
+  content.push("       <select id='select-compose'>");
 
   for(var obj in etat.yp) {
-     content += "          <option value=" + obj.toString() + ">" + obj.toString() + "</option>\n";
+     content.push("          <option value=" + obj.toString() + ">" + obj.toString() + "</option>");
   }
-  content    += "       </select>\n";
-  content    += "     </td>\n";
-  content    += "  </tr>\n";
-  content    += "  <tr>\n";
-  content    += "    <td> Message: </td>\n"
-  content    += "    <td>\n";
-  content    += "      <textarea id='textarea-compose' cols='40' rows='5'>messag...</textarea>\n";
-  content    += "    </td>\n";
-  content    += "  </tr>\n";
-  content    += "  <tr>\n";
-  content    += "    <td></td>\n";
-  content    += "    <td>\n";
-  content    += "      <button type='button' onclick='onButtonSendClick()'>Send</button>\n";
-  content    += "    </td>\n";
-  content    += "  </tr>\n";
-  content    += "</table>\n";
+  content.push("       </select>");
+  content.push("     </td>");
+  content.push("  </tr>");
+  content.push("  <tr>");
+  content.push("    <td> Message: </td>");
+  content.push("    <td>");
+  content.push("      <textarea id='textarea-compose' cols='40' rows='5'>messag...</textarea>");
+  content.push("    </td>");
+  content.push("  </tr>");
+  content.push("  <tr>");
+  content.push("    <td></td>");
+  content.push("    <td>");
+  content.push("      <button type='button' onclick='onButtonComposeSendClick()'>Send</button>");
+  content.push("    </td>");
+  content.push("  </tr>");
+  content.push("</table>");
 
   var bottomRightRegion = document.getElementById('bottom-right-region');
-  bottomRightRegion.innerHTML = content;
+  bottomRightRegion.innerHTML = content.join("\n");
+  
+  var topRightRegion = document.getElementById('top-right-region');
+  topRightRegion.innerHTML = "Compose new message";
 }
 
 function onButtonInboxClick(){
-  //alert("Inbox");
-
-  var content = "<table>\n";
-  content    += " <thead>\n";
-  content    += "   <tr>\n";
-  content    += "     <td>From</td><td>Date</td>\n";
-  content    += "   </tr>\n";
-  content    += " </thead>\n";
-  content    += " <tbody>\n";
+  var content = [];
+  content.push("<table>");
+  content.push(" <thead>");
+  content.push("   <tr>");
+  content.push("     <td>From</td><td>Date</td>");
+  content.push("   </tr>");
+  content.push(" </thead>");
+  content.push(" <tbody>");
 
   for(var i = 0;i < etat.inbox.length;i++){
-    content += "    <tr>\n";
-    content += "      <td><a href='#?from=" + etat.inbox[i].from + "&date=" + etat.inbox[i].date + "&msg=" + etat.inbox[i].msg + "' onclick='onLinkInboxMessageClick()'>" + etat.inbox[i].from + "</a></td><td>" + etat.inbox[i].date + "</td>\n";
-    content += "    </tr>\n";
+    content.push("    <tr>");
+    content.push("      <td><a href='#' onclick='onLinkInboxMessageClick(\"" + etat.inbox[i].from + "\",\"" + etat.inbox[i].date + "\",\"" + etat.inbox[i].msg + "\")' >" + etat.inbox[i].from + "</a></td><td>" + etat.inbox[i].date + "</td>");
+    content.push("    </tr>");
   }
-  content    += " </tbody>\n";
-  content    += "</table>\n";
+  content.push(" </tbody>");
+  content.push("</table>");
 
   var bottomRightRegion = document.getElementById('bottom-right-region');
-  bottomRightRegion.innerHTML = content;
+  bottomRightRegion.innerHTML = content.join("\n");
+  
+  var topRightRegion = document.getElementById('top-right-region');
+  topRightRegion.innerHTML = "Inbox";
 }
 
 function onButtonOutboxClick(){
-  //alert("outbox");
-
-  var content = "<table>\n";
-  content    += " <thead>\n";
-  content    += "   <tr>\n";
-  content    += "     <td>To</td><td>Date</td>\n";
-  content    += "   </tr>\n";
-  content    += " </thead>\n";
-  content    += " <tbody>\n";
+  var content = [];
+  content.push("<table>");
+  content.push(" <thead>");
+  content.push("   <tr>");
+  content.push("     <td>To</td><td>Date</td>");
+  content.push("   </tr>");
+  content.push(" </thead>");
+  content.push(" <tbody>");
 
   for(var i = 0;i < etat.outbox.length;i++){
-    content += "    <tr>\n";
-	content += "      <td><a href='#?to=" + etat.outbox[i].to + "&date=" + etat.outbox[i].date + "&msg=" + etat.outbox[i].msg + "' onclick='onLinkOutboxMessageClick()'>" + etat.outbox[i].to + "</a></td><td>" + etat.outbox[i].date + "</td>\n";
-    content += "    </tr>\n";
+    content.push("    <tr>");
+	content.push("      <td><a href='#' onclick='onLinkOutboxMessageClick(\"" + etat.outbox[i].to + "\",\"" + etat.outbox[i].date + "\",\"" + etat.outbox[i].msg + "\")' >" + etat.outbox[i].to + "</a></td><td>" + etat.outbox[i].date + "</td>");
+    content.push("    </tr>");
   }
-  content    += " </tbody>\n";
-  content    += "</table>\n";
+  content.push(" </tbody>");
+  content.push("</table>");
 
   var bottomRightRegion = document.getElementById('bottom-right-region');
-  bottomRightRegion.innerHTML = content;
+  bottomRightRegion.innerHTML = content.join("\n");
+  
+  var topRightRegion = document.getElementById('top-right-region');
+  topRightRegion.innerHTML = "Outbox";
 }
 
 function onButtonYpClick() {
-  //alert("Yp");
-
-  var content = "<table>\n";
-  content    += " <thead>\n";
-  content    += "   <tr>\n";
-  content    += "     <td>To</td><td>Date</td>\n";
-  content    += "   </tr>\n";
-  content    += " </thead>\n";
-  content    += " <tbody>\n";
+  var content = [];
+  content.push("<table>");
+  content.push(" <thead>");
+  content.push("   <tr>");
+  content.push("     <td>Address</td><td>Name</td><td>Actions</td>");
+  content.push("   </tr>");
+  content.push(" </thead>");
+  content.push(" <tbody>");
 
   for(var obj in etat.yp) {
-    content += "    <tr>\n";
-    content += "      <td><a href='#'>" + obj.toString() + "</a></td><td>" + etat.yp[obj].name + "</td>";
-    content += "    </tr>\n";
+    content.push("    <tr>");
+    content.push("      <td>" + obj.toString() + "</td><td>" + etat.yp[obj].name + "</td><td><a href='#' onclick='onLinkYpEditClick(\"" + obj.toString() + "\",\"" + etat.yp[obj].name + "\")'>Edit</a>|<a href='#' onclick='onLinkYpDeleteClick(\"" + obj.toString() + "\")'>Delete</a></td>");
+    content.push("    </tr>");
   }
-  content    += " </tbody>\n";
-  content    += "</table>\n";
+  content.push("    <tr>");
+  content.push("     <td></td><td><button type='button' onclick='onButtonYpAddClick()'>Add</button></td><td></td>");
+  content.push("    </tr>");
+  content.push(" </tbody>");
+  content.push("</table>");
 
   var bottomRightRegion = document.getElementById('bottom-right-region');
-  bottomRightRegion.innerHTML = content;
+  bottomRightRegion.innerHTML = content.join("\n");
+  
+  var topRightRegion = document.getElementById('top-right-region');
+  topRightRegion.innerHTML = "Yp";
 }
 
-function onButtonSendClick() { 
+function onButtonComposeSendClick() { 
 	var selectText = getSelectedText('select-compose');
-	var texteareaText = document.getElementById('textarea-compose').value
+	var texteareaText = document.getElementById('textarea-compose').value;
 	var dateText = getCurrentDateTimeText();
 	
 	var objet = {
@@ -141,59 +144,119 @@ function onButtonSendClick() {
       "msg": texteareaText };
 	  
 	etat.outbox.push(objet);
-	alert("Your message has been sent");
+	onButtonOutboxClick();
 }
 
-function onLinkInboxMessageClick() {
-	var list = getUrlVars();
-	
-	var from1 = list["from"];
-	var date = list["date"];
-	var msg  = list["msg"];
-	
-	var content = "<table>\n";
-	content    += " <tr>\n";
-	content    += "   <td>From:</td>\n";
-	content    += "   <td>" + from1 + "</td>\n";
-	content    += "	</tr>\n";
-	content    += " <tr>\n";
-	content    += "   <td>Date:</td>\n";
-	content    += "   <td>" + date + "</td>\n";
-	content    += "	</tr>\n";
-	content    += " <tr>\n";
-	content    += "   <td>Message:</td>\n";
-	content    += "   <td>" + msg + "</td>\n";
-	content    += "	</tr>\n";
-	content    += "</table>\n";
+function onLinkInboxMessageClick(from1,date,msg) {
+	var content = [];
+	content.push("<table>");
+	content.push(" <tr>");
+	content.push("   <td>From:</td>");
+	content.push("   <td>" + from1 + "</td>");
+	content.push("	</tr>");
+	content.push(" <tr>");
+	content.push("   <td>Date:</td>");
+	content.push("   <td>" + date + "</td>");
+	content.push("	</tr>");
+	content.push(" <tr>");
+	content.push("   <td>Message:</td>");
+	content.push("   <td>" + msg + "</td>");
+	content.push("	</tr>");
+	content.push("</table>");
 
 	var bottomRightRegion = document.getElementById('bottom-right-region');
-	bottomRightRegion.innerHTML = content;
+	bottomRightRegion.innerHTML = content.join("\n");
+	
+	var topRightRegion = document.getElementById('top-right-region');
+	topRightRegion.innerHTML = "Inbox message";
 }
 
-function onLinkOutboxMessageClick() {
-	var list = getUrlVars();
-	
-	var to = list["to"];
-	var date = list["date"];
-	var msg  = list["msg"];
-	
-	var content = "<table>\n";
-	content    += " <tr>\n";
-	content    += "   <td>To:</td>\n";
-	content    += "   <td>" + to + "</td>\n";
-	content    += "	</tr>\n";
-	content    += " <tr>\n";
-	content    += "   <td>Date:</td>\n";
-	content    += "   <td>" + date + "</td>\n";
-	content    += "	</tr>\n";
-	content    += " <tr>\n";
-	content    += "   <td>Message:</td>\n";
-	content    += "   <td>" + msg + "</td>\n";
-	content    += "	</tr>\n";
-	content    += "</table>\n";
+function onLinkOutboxMessageClick(to,date,msg) {
+	var content = [];
+	content.push("<table>");
+	content.push(" <tr>");
+	content.push("   <td>To:</td>");
+	content.push("   <td>" + to + "</td>");
+	content.push("	</tr>");
+	content.push(" <tr>");
+	content.push("   <td>Date:</td>");
+	content.push("   <td>" + date + "</td>");
+	content.push("	</tr>");
+	content.push(" <tr>");
+	content.push("   <td>Message:</td>");
+	content.push("   <td>" + msg + "</td>");
+	content.push("	</tr>");
+	content.push("</table>");
 
 	var bottomRightRegion = document.getElementById('bottom-right-region');
-	bottomRightRegion.innerHTML = content;
+	bottomRightRegion.innerHTML = content.join("\n");
+	
+	var topRightRegion = document.getElementById('top-right-region');
+	topRightRegion.innerHTML = "Outbox message";
+}
+
+function onLinkYpEditClick(address,name){
+	var content = [];
+	content.push("<table>");
+	content.push("	<tr>");
+	content.push("		<td class='title'><label for='address'>Address:</label></td><td><input type='text' name='address' id='text-address' value='" + address + "' disabled /></td>");
+	content.push("	</tr>");
+	content.push("	<tr>");
+	content.push("		<td class='title'><label for='name'>Name:</label></td><td><input type='text' name='name' id='text-name' value='" + name + "' /></td>");
+	content.push("	</tr>");
+	content.push("	<tr>");
+	content.push("		<td></td><td><button type='button' onclick='onButtonYpEditSaveClick()'>Save</button></td>");
+	content.push("	</tr>");
+	content.push("</table>");
+	
+	var bottomRightRegion = document.getElementById('bottom-right-region');
+	bottomRightRegion.innerHTML = content.join("\n");
+	
+	var topRightRegion = document.getElementById('top-right-region');
+	topRightRegion.innerHTML = "Update Yp";
+}
+
+function onLinkYpDeleteClick(address){
+	delete etat.yp[address];
+	
+	onButtonYpClick();
+}
+
+function onButtonYpAddClick(){
+	var content = [];
+	content.push("<table>");
+	content.push("	<tr>");
+	content.push("		<td><label for='address'>Address</label></td><td><input type='text' name='address' id='text-address' value='' /></td>");
+	content.push("	</tr>");
+	content.push("	<tr>");
+	content.push("		<td><label for='name'>Name</label></td><td><input type='text' name='name' id='text-name' value='' /></td>");
+	content.push("	</tr>");
+	content.push("	<tr>");
+	content.push("		<td></td><td><button type='button' onclick='onButtonYpAddSaveClick()'>Add</button></td>");
+	content.push("	</tr>");
+	content.push("</table>");
+	
+	var bottomRightRegion = document.getElementById('bottom-right-region');
+	bottomRightRegion.innerHTML = content.join("\n");
+	
+	var topRightRegion = document.getElementById('top-right-region');
+	topRightRegion.innerHTML = "Add to Yp";
+}
+
+function onButtonYpEditSaveClick(){
+	var addressText = document.getElementById('text-address').value
+	var nameText = document.getElementById('text-name').value;
+	
+	etat.yp[addressText] = {"name": nameText};
+	onButtonYpClick();
+}
+
+function onButtonYpAddSaveClick(){
+	var addressText = document.getElementById('text-address').value
+	var nameText = document.getElementById('text-name').value;
+		  
+	etat.yp[addressText] = {"name": nameText};
+	onButtonYpClick();
 }
 
 // Outils
@@ -232,17 +295,4 @@ function getCurrentDateTimeText(){
 	} 
 	//"2016 01 03 10:15:31"
 	return yyyy + " " +  mm + " " + dd + " " + hh + ":" + MM + ":" + ss;     
-}
-
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
-
-function getUrlVars() {
-	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-		vars[key] = value.replaceAll("%20", " ");
-	});
-	return vars;
 }
