@@ -6,6 +6,19 @@ button, input[type="text"],select {
 	width:200px;
 }
 
+.blue-theme {
+    background-color: #0072C6;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
 table {
 	width:100%;
 	border-spacing:0;
@@ -24,15 +37,16 @@ thead, td.bold {
 }
 
 #top-left-region {
-	background-color:#0072C3;
+	background-color:#0072C6;
 	padding-left:4px;
 	width:200px;
 }
 
 #top-right-region {
-	background-color:#0072C3;
+	background-color:#0072C6;
 	color:#ffffff;
 	font-size:24px;
+	text-align:center;
 }
 
 #bottom-left-region {

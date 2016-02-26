@@ -37,13 +37,13 @@ function onButtonComposeClick(){
   content.push("  <tr>");
   content.push("    <td class='bold'> Message: </td>");
   content.push("    <td>");
-  content.push("      <textarea id='textarea-compose' cols='40' rows='5'>messag...</textarea>");
+  content.push("      <textarea id='textarea-compose' cols='40' rows='5'>Type your message here...</textarea>");
   content.push("    </td>");
   content.push("  </tr>");
   content.push("  <tr>");
   content.push("    <td></td>");
   content.push("    <td>");
-  content.push("      <button type='button' onclick='onButtonComposeSendClick()'>Send</button>");
+  content.push("      <button class='blue-theme' type='button' onclick='onButtonComposeSendClick()'>Send</button>");
   content.push("    </td>");
   content.push("  </tr>");
   content.push("</table>");
@@ -121,7 +121,7 @@ function onButtonYpClick() {
     content.push("    </tr>");
   }
   content.push("    <tr>");
-  content.push("     <td></td><td><button type='button' onclick='onButtonYpAddClick()'>Add</button></td><td></td>");
+  content.push("     <td></td><td><button class='blue-theme' type='button' onclick='onButtonYpAddClick()'>Add</button></td><td></td>");
   content.push("    </tr>");
   content.push(" </tbody>");
   content.push("</table>");
@@ -151,15 +151,15 @@ function onLinkInboxMessageClick(from1,date,msg) {
 	var content = [];
 	content.push("<table>");
 	content.push(" <tr>");
-	content.push("   <td>From:</td>");
+	content.push("   <td class='bold'>From:</td>");
 	content.push("   <td>" + from1 + "</td>");
 	content.push("	</tr>");
 	content.push(" <tr>");
-	content.push("   <td>Date:</td>");
+	content.push("   <td class='bold'>Date:</td>");
 	content.push("   <td>" + date + "</td>");
 	content.push("	</tr>");
 	content.push(" <tr>");
-	content.push("   <td>Message:</td>");
+	content.push("   <td class='bold'>Message:</td>");
 	content.push("   <td>" + msg + "</td>");
 	content.push("	</tr>");
 	content.push("</table>");
@@ -205,7 +205,7 @@ function onLinkYpEditClick(address,name){
 	content.push("		<td class='bold'><label for='name'>Name:</label></td><td><input type='text' name='name' id='text-name' value='" + name + "' /></td>");
 	content.push("	</tr>");
 	content.push("	<tr>");
-	content.push("		<td></td><td><button type='button' onclick='onButtonYpEditSaveClick()'>Save</button></td>");
+	content.push("		<td></td><td><button class='blue-theme' type='button' onclick='onButtonYpEditSaveClick()'>Save</button></td>");
 	content.push("	</tr>");
 	content.push("</table>");
 	
@@ -217,7 +217,10 @@ function onLinkYpEditClick(address,name){
 }
 
 function onLinkYpDeleteClick(address){
-	delete etat.yp[address];
+	var result = confirm("Do you really want to delete this record?");
+	if (result == true) {
+		delete etat.yp[address];
+	} 
 	
 	onButtonYpClick();
 }
@@ -232,7 +235,7 @@ function onButtonYpAddClick(){
 	content.push("		<td class='bold'><label for='name'>Name:</label></td><td><input type='text' name='name' id='text-name' value='' /></td>");
 	content.push("	</tr>");
 	content.push("	<tr>");
-	content.push("		<td></td><td><button type='button' onclick='onButtonYpAddSaveClick()'>Add</button></td>");
+	content.push("		<td></td><td><button class='blue-theme' type='button' onclick='onButtonYpAddSaveClick()'>Add</button></td>");
 	content.push("	</tr>");
 	content.push("</table>");
 	
@@ -254,8 +257,19 @@ function onButtonYpEditSaveClick(){
 function onButtonYpAddSaveClick(){
 	var addressText = document.getElementById('text-address').value
 	var nameText = document.getElementById('text-name').value;
-		  
-	etat.yp[addressText] = {"name": nameText};
+	
+	if(etat.yp[addressText]) {
+		alert(addressText + " already exists.");
+	}
+	else if(addressText == "") {
+		alert("The address is empty.");
+	}
+	else if(nameText == "") {
+		alert("The name is empty.");
+	}
+	else {
+		etat.yp[addressText] = {"name": nameText};
+	}
 	onButtonYpClick();
 }
 
