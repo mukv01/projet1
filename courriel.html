@@ -1,41 +1,41 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="courriel.css" />
-    <script language="javascript" type="text/javascript" src="courriel.js"></script>
-  </head>
-  <body onload="onButtonInboxClick()">
-    <table class="main-frame">
-      <tr class="top-row">
-        <td id="top-left-region">
-          <button class="blue-theme" type="button" onclick="onButtonComposeClick()">Compose</button>
-        </td>
-        <td id="top-right-region"></td>
-      </tr>
-      <tr>
-        <td id="bottom-left-region">
-          <table>
-            <tr>
-              <td>
-                <button class="blue-theme" type="button" onclick="onButtonInboxClick()">Inbox</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button class="blue-theme" type="button" onclick="onButtonOutboxClick()">Outbox</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button class="blue-theme" type="button" onclick="onButtonYpClick()">Yp</button>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td id="bottom-right-region">
-
-        </td>
-      </tr>
-    </table>
-  </body>
+	<head>
+		<meta name="author" content="Aline Landry, Ariella Sota, Arnaud Niyonkuru, Reagan Shuku, Vestine Mukeshimana" />
+		<link rel="stylesheet" type="text/css" href="courriel.css" />
+		<script type="text/javascript" src="courriel.js"></script>
+		<title>Interface web pour le courriel</title>
+	</head>
+	<body onload="onButtonInboxClick()">
+		<table class="main-frame">
+			<tr class="top-row">
+				<td id="top-left-region">
+					<button class="blue-theme" type="button" onclick="onButtonComposeClick()">Compose</button>
+				</td>
+				<td id="top-right-region"></td>
+			</tr>
+			<tr>
+				<td id="bottom-left-region">
+					<table>
+						<tr>
+							<td>
+								<button class="blue-theme" type="button" onclick="onButtonInboxClick()">Inbox</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button class="blue-theme" type="button" onclick="onButtonOutboxClick()">Outbox</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button class="blue-theme" type="button" onclick="onButtonYpClick()">Yp</button>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td id="bottom-right-region"></td>
+			</tr>
+		</table>
+	</body>
 </html>
